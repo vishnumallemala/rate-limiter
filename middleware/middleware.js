@@ -1,7 +1,7 @@
 const NodeCache = require('node-cache');
 const myCache = new NodeCache();
-const genUtil = require('./genericUtil');
-const { getFormattedMessage } = require('./errorMessageHandler');
+const genUtil = require('../util/genericUtil');
+const { getFormattedMessage } = require('../util/errorMessageHandler');
 const rateLimit = process.env.RATE_LIMIT;
 
 let timer = 60;
@@ -19,6 +19,7 @@ exports.rateLimiter = async function(req, res, next){
                     "description": getFormattedMessage('RATE_LIMIT_EXCEEDED', timer)
                 }
             }
+            res.status(429);
             return res.send(errObj);
         }
         else{
