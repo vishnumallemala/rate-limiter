@@ -9,7 +9,7 @@ const swaggerDocument = require('./swagger.json');
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/explorer', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/getRate', rateLimiter, async (req, res)=>{
     await getUtil.addDataToCache(req.ip);
@@ -25,7 +25,8 @@ app.get('/getRate', rateLimiter, async (req, res)=>{
 });
 
 const server = app.listen(port, ()=>{
-    console.log("App running on", port);
+    console.log("Web Application is running on port", port);
+    console.log("Access Swagger Explorer http://localhost:"+port+"/explorer");
 });
 
 module.exports = server;
