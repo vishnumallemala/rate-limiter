@@ -1,4 +1,4 @@
-FROM alpine:node
+FROM node:16-alpine
 
 WORKDIR /usr/src/rate-limit
 COPY package.json ./
