@@ -1,0 +1,86 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Rate Limiter",
+        "description": "This is a sample rate limiting application which blocks the user to send requests if number of request exceed configured number of requests per ip per minute.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Rate",
+            "description": "Everything about your Pets",
+            "externalDocs": {
+                "description": "Find out more",
+                "url": "http://swagger.io"
+            }
+        }
+    ],
+    "paths": {
+        "/getRate": {
+            "get": {
+                "tags": [
+                    "Rate"
+                ],
+                "summary": "Gets the number of request served till now",
+                "description": "Gets the number of request served till now",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Success"
+                                }
+                            }
+                        }
+                    },
+                    "429": {
+                        "description": "User reached exceeded the number of request can be served by the server within 60 seconds",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Success": {
+                "type": "object",
+                "properties": {
+                    "no_of_requests": {
+                        "type": "integer",
+                        "format": "int64",
+                        "example": 10
+                    }
+                }
+            },
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "object",
+                        "properties": {
+                            "code": {
+                                "type": "string"
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

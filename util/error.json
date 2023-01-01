@@ -1,0 +1,5 @@
+{
+    "english":{
+        "RATE_LIMIT_EXCEEDED": "Server has received many requests from you please wait for {#message#}s"
+    }
+}
