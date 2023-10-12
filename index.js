@@ -9,7 +9,7 @@ const swaggerDocument = require('./swagger.json');
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use('/explorer', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.get('/getRate', rateLimiter, async (req, res)=>{
     await getUtil.addDataToCache(req.ip);
